@@ -17,7 +17,6 @@ typedef void(^backBolock)(NSDictionary * );
 @interface BzwPicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
 
 @property (strong,nonatomic)UIPickerView *pick;
-@property (strong,nonatomic)UIView *shader;
 
 @property(nonatomic,copy)backBolock bolock;
 
@@ -92,8 +91,7 @@ typedef void(^backBolock)(NSDictionary * );
                   weightArry:(NSArray *)weightArry
        pickerToolBarFontSize:(NSString *)pickerToolBarFontSize
               pickerFontSize:(NSString *)pickerFontSize
-             pickerRowHeight:(NSString *)pickerRowHeight
-                      shader:(UIView *)shader;
+             pickerRowHeight:(NSString *)pickerRowHeight;
 
 -(void)selectRow;
 @end

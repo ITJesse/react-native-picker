@@ -25,7 +25,6 @@
        pickerToolBarFontSize:(NSString *)pickerToolBarFontSize
               pickerFontSize:(NSString *)pickerFontSize
              pickerRowHeight:(NSString *)pickerRowHeight
-                      shader:(UIView *)shader
 
 {
     self = [super initWithFrame:frame];
@@ -49,26 +48,19 @@
             [self makeuiWith:topbgColor With:bottombgColor With:rightbtnbgColor With:centerbtnColor];
             [self selectRow];
         });
-        
-        if ([[UIDevice currentDevice].systemVersion doubleValue] >= 9.0 ) {
-            self.height=250;
-        }else{
-            self.height=220;
-        }
-        self.shader = shader;
     }
     return self;
 }
 -(void)makeuiWith:(NSArray *)topbgColor With:(NSArray *)bottombgColor With:(NSArray *)rightbtnbgColor With:(NSArray *)centerbtnColor
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-self.height, self.frame.size.width, 46)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 46)];
     view.backgroundColor = topbgColor;
     [self addSubview:view];
     
-    self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.leftBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-self.height);
-    [self.leftBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.leftBtn];
+//    self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.leftBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-self.height);
+//    [self.leftBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:self.leftBtn];
     
     self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightBtn.frame = CGRectMake(view.frame.size.width-90,0, 90, 46);
@@ -87,7 +79,7 @@
     [cenLabel setTextColor:centerbtnColor];
     [view addSubview:cenLabel];
     
-    self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-self.height+46, self.frame.size.width, self.height - 46)];
+    self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 46, self.frame.size.width, self.frame.size.height - 46)];
     self.pick.delegate = self;
     self.pick.dataSource = self;
     self.pick.showsSelectionIndicator=YES;
@@ -614,7 +606,6 @@
     
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_shader setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [UIView animateWithDuration:.2f animations:^{
             [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height)];
         }];
@@ -651,9 +642,8 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_shader setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [UIView animateWithDuration:.2f animations:^{
-            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height)];
+            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 250)];
         }];
     });
 }

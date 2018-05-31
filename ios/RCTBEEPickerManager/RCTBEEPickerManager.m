@@ -14,7 +14,6 @@
 @interface RCTBEEPickerManager()
 
 @property(nonatomic,strong)BzwPicker *pick;
-@property(nonatomic,strong)UIWindow *shader;
 @property(nonatomic,assign)float height;
 @property(nonatomic,weak)UIWindow * window;
 
@@ -73,10 +72,6 @@ RCT_EXPORT_METHOD(_init:(NSDictionary *)indic) {
             });
         }
         
-        if (self.shader) {
-            [self.shader removeFromSuperview];
-        }
-        
     }];
     
     if ([[UIDevice currentDevice].systemVersion doubleValue] >= 9.0 ) {
@@ -84,9 +79,6 @@ RCT_EXPORT_METHOD(_init:(NSDictionary *)indic) {
     }else{
         self.height=220;
     }
-    
-    self.shader = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    self.shader.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
     
     self.pick=[[BzwPicker alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height)
                                           dic:dataDic
@@ -101,8 +93,7 @@ RCT_EXPORT_METHOD(_init:(NSDictionary *)indic) {
                                    weightArry:weightArry
                         pickerToolBarFontSize:pickerToolBarFontSize
                                pickerFontSize:pickerFontSize
-                              pickerRowHeight: pickerRowHeight
-                                       shader:self.shader];
+                              pickerRowHeight: pickerRowHeight];
     
     _pick.bolock=^(NSDictionary *backinfoArry){
         
@@ -113,7 +104,6 @@ RCT_EXPORT_METHOD(_init:(NSDictionary *)indic) {
     };
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.window addSubview:self.shader];
         [self.window addSubview:_pick];
     });
     
@@ -122,9 +112,8 @@ RCT_EXPORT_METHOD(_init:(NSDictionary *)indic) {
 RCT_EXPORT_METHOD(show){
     if (self.pick) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_shader setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
             [UIView animateWithDuration:.3 animations:^{
-                [_pick setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                [_pick setFrame:CGRectMake(0, SCREEN_HEIGHT-self.height, SCREEN_WIDTH, self.height)];
             }];
         });
     }
@@ -134,7 +123,6 @@ RCT_EXPORT_METHOD(show){
 RCT_EXPORT_METHOD(hide){
     if (self.pick) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_shader setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
             [UIView animateWithDuration:.3 animations:^{
                 [_pick setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height)];
             }];
