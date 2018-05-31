@@ -17,6 +17,7 @@ typedef void(^backBolock)(NSDictionary * );
 @interface BzwPicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
 
 @property (strong,nonatomic)UIPickerView *pick;
+@property (strong,nonatomic)UIView *shader;
 
 @property(nonatomic,copy)backBolock bolock;
 
@@ -36,14 +37,13 @@ typedef void(^backBolock)(NSDictionary * );
 @property (strong,nonatomic)UIButton *leftBtn;//取消
 @property (strong,nonatomic)UIButton *rightBtn;
 
-@property(strong,nonatomic)NSString *leftStr;
 @property(strong,nonatomic)NSString *centStr;
 @property(strong,nonatomic)NSString *rightStr;
 @property(strong,nonatomic)NSString *pickerToolBarFontSize;
 @property(strong,nonatomic)NSString *pickerFontSize;
-@property(strong,nonatomic)NSString *pickerFontFamily;
 @property(strong,nonatomic)NSArray *pickerFontColor;
 @property(strong,nonatomic)NSString *pickerRowHeight;
+@property(nonatomic,assign) NSInteger height;
 
 
 
@@ -79,8 +79,21 @@ typedef void(^backBolock)(NSDictionary * );
 
 
 
--(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic leftStr:(NSString *)leftStr centerStr:(NSString *)centerStr rightStr:(NSString *)rightStr topbgColor:(NSArray *)topbgColor bottombgColor:(NSArray *)bottombgColor leftbtnbgColor:(NSArray *)leftbtnbgColor rightbtnbgColor:(NSArray *)rightbtnbgColor centerbtnColor:(NSArray *)centerbtnColor selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
-       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor  pickerRowHeight:(NSString *)pickerRowHeight  pickerFontFamily:(NSString *)pickerFontFamily;
+-(instancetype)initWithFrame:(CGRect)frame
+                         dic:(NSDictionary *)dic
+                  topbgColor:(UIColor *)topbgColor
+               bottombgColor:(UIColor *)bottombgColor
+             rightbtnbgColor:(UIColor *)rightbtnbgColor
+              centerbtnColor:(UIColor *)centerbtnColor
+             pickerFontColor:(UIColor *)pickerFontColor
+                   centerStr:(NSString *)centerStr
+                    rightStr:(NSString *)rightStr
+             selectValueArry:(NSArray *)selectValueArry
+                  weightArry:(NSArray *)weightArry
+       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize
+              pickerFontSize:(NSString *)pickerFontSize
+             pickerRowHeight:(NSString *)pickerRowHeight
+                      shader:(UIView *)shader;
 
 -(void)selectRow;
 @end

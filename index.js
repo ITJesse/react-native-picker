@@ -1,7 +1,8 @@
 import {
     Platform,
     NativeModules,
-    NativeAppEventEmitter
+    NativeAppEventEmitter,
+    processColor
 } from 'react-native';
 
 const ios = Platform.OS === 'ios';
@@ -10,14 +11,12 @@ const Picker = NativeModules.BEEPickerManager;
 const options = {
     isLoop: false,
     pickerConfirmBtnText: 'confirm',
-    pickerCancelBtnText: 'cancel',
     pickerTitleText: 'pls select',
-    pickerConfirmBtnColor: [1, 186, 245, 1],
-    pickerCancelBtnColor: [1, 186, 245, 1],
-    pickerTitleColor: [20, 20, 20, 1],
-    pickerToolBarBg: [232, 232, 232, 1],
+    pickerConfirmBtnColor: processColor('rgb(1, 186, 245)'),
+    pickerTitleColor: processColor('rgb(20, 20, 20)'),
+    pickerToolBarBg: processColor('rgb(232, 232, 232)'),
     pickerTextEllipsisLen: 6,
-    pickerBg: [196, 199, 206, 1],
+    pickerBg: processColor('rgb(196, 199, 206)'),
     pickerRowHeight: 24,
     wheelFlex: [1, 1, 1],
     pickerData: [],
@@ -27,7 +26,7 @@ const options = {
     onPickerSelect(){},
     pickerToolBarFontSize: 16,
     pickerFontSize: 16,
-    pickerFontColor: [31, 31 ,31, 1]
+    pickerFontColor: processColor('rgb(31, 31 ,31, 1)')
 };
 
 export default {
